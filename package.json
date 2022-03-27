@@ -10,6 +10,7 @@
     "@adiwajshing/baileys": "github:adiwajshing/baileys",
     "@adiwajshing/keyed-db": "^0.2.4",
     "@typegoose/typegoose": "^9.7.1",
+    "debounce": "^1.2.1",
     "dotenv": "^16.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "googleapis": "39",
@@ -25,6 +26,7 @@
     "ytsr": "^3.6.0"
   },
   "devDependencies": {
+    "@types/debounce": "^1.2.1",
     "@types/fluent-ffmpeg": "^2.1.20",
     "@types/memorystream": "^0.3.0"
   }

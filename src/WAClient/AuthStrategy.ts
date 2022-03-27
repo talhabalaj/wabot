@@ -7,7 +7,7 @@ import {
   useSingleFileAuthState,
 } from "@adiwajshing/baileys";
 import { DocumentType } from "@typegoose/typegoose";
-import mongoose from "mongoose";
+import debounce from "debounce";
 import { Logger, LoggerOptions } from "pino";
 import { AuthClass, AuthModel } from "../database";
 import {
@@ -89,7 +89,6 @@ export class MongoDbAuthStrategy implements IAuthStrategy {
       });
 
       const creds = initAuthCreds();
-      console.log(creds);
 
       record = new AuthModel({
         jid: this.userJid,
@@ -109,7 +108,6 @@ export class MongoDbAuthStrategy implements IAuthStrategy {
 
     this.logger.info("Initialized mongodb auth strategy");
     this.auth = record;
-    this.saveCredsOnline();
     this.initialized = true;
   }
 
@@ -125,9 +123,6 @@ export class MongoDbAuthStrategy implements IAuthStrategy {
       .catch((err) => {
         this.logger.error(err, "Error while saving auth record");
       });
-    setTimeout(() => {
-      this.saveCredsOnline();
-    }, 10_000);
   }
 
   getCreds(): AuthenticationState {
@@ -179,5 +174,9 @@ export class MongoDbAuthStrategy implements IAuthStrategy {
       this.auth.authState.creds = { ...this.auth.authState.creds, ...creds };
       this.logger.debug(creds, "Updating creds");
     }
+
+    debounce(() => {
+      this.saveCredsOnline();
+    }, 1000)();
   }
 }

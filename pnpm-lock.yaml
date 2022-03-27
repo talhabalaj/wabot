@@ -4,8 +4,10 @@ specifiers:
   '@adiwajshing/baileys': github:adiwajshing/baileys
   '@adiwajshing/keyed-db': ^0.2.4
   '@typegoose/typegoose': ^9.7.1
+  '@types/debounce': ^1.2.1
   '@types/fluent-ffmpeg': ^2.1.20
   '@types/memorystream': ^0.3.0
+  debounce: ^1.2.1
   dotenv: ^16.0.0
   fluent-ffmpeg: ^2.1.2
   googleapis: '39'
@@ -24,6 +26,7 @@ dependencies:
   '@adiwajshing/baileys': github.com/adiwajshing/baileys/6275b85eaebb0d1ff6c4054bc5dd90774fac9d38_a9c255cd4f7c72f8caee0a723a9801d6
   '@adiwajshing/keyed-db': 0.2.4
   '@typegoose/typegoose': 9.7.1_mongoose@6.2.8
+  debounce: 1.2.1
   dotenv: 16.0.0
   fluent-ffmpeg: 2.1.2
   googleapis: 39.2.0
@@ -39,6 +42,7 @@ dependencies:
   ytsr: 3.6.0
 
 devDependencies:
+  '@types/debounce': 1.2.1
   '@types/fluent-ffmpeg': 2.1.20
   '@types/memorystream': 0.3.0
 
@@ -153,6 +157,10 @@ packages:
       semver: 7.3.5
       tslib: 2.3.1
     dev: false
+
+  /@types/debounce/1.2.1:
+    resolution: {integrity: sha512-epMsEE85fi4lfmJUH/89/iV/LI+F5CvNIvmgs5g5jYFPfhO2S/ae8WSsLOKWdwtoaZw9Q2IhJ4tQ5tFCcS/4HA==}
+    dev: true
 
   /@types/fluent-ffmpeg/2.1.20:
     resolution: {integrity: sha512-B+OvhCdJ3LgEq2PhvWNOiB/EfwnXLElfMCgc4Z1K5zXgSfo9I6uGKwR/lqmNPFQuebNnes7re3gqkV77SyypLg==}
@@ -287,6 +295,10 @@ packages:
 
   /curve25519-js/0.0.4:
     resolution: {integrity: sha512-axn2UMEnkhyDUPWOwVKBMVIzSQy2ejH2xRGy1wq81dqRwApXfIzfbE3hIX0ZRFBIihf/KDqK158DLwESu4AK1w==}
+    dev: false
+
+  /debounce/1.2.1:
+    resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}
     dev: false
 
   /debug/3.2.7:

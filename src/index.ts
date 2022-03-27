@@ -23,7 +23,7 @@ async function main() {
     },
   });
 
-  bot.addFeature(new YouTubeFeature());
   bot.addFeature(new UniNotificationFeature("my_account"));
+  bot.addFeature(new YouTubeFeature());
 }
 main();

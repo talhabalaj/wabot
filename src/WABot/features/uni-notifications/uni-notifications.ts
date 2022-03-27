@@ -247,14 +247,19 @@ export class UniNotificationFeature extends BaseWAFeature {
       message.message.conversation || message.message.extendedTextMessage?.text;
 
     if (text.startsWith(`pls sub ${UniNotificationFeature.featureName}`)) {
-      await SubscriptionModel.create({
-        jid: message.key.remoteJid,
-        name: UniNotificationFeature.featureName,
-      });
-
-      await this.socket.sendMessage(message.key.remoteJid, {
-        text: `You are now subscribed to ${UniNotificationFeature.featureName}`,
-      });
+      try {
+        await SubscriptionModel.create({
+          jid: message.key.remoteJid,
+          name: UniNotificationFeature.featureName,
+        });
+        await this.socket.sendMessage(message.key.remoteJid, {
+          text: `You are now subscribed to ${UniNotificationFeature.featureName}`,
+        });
+      } catch (e) {
+        await this.socket.sendMessage(message.key.remoteJid, {
+          text: `You are already subscribed to ${UniNotificationFeature.featureName}`,
+        });
+      }
     }
   }
 }

@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: wabot
+      app: wabots
   template:
     metadata:
       labels:

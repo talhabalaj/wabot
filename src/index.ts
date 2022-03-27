@@ -2,7 +2,10 @@ import mongoose from "mongoose";
 import { config } from "dotenv";
 
 import { WABot } from "./WABot";
-import { MongoDbAuthStrategy, LocalFileAuthStrategy } from "./WAClient/AuthStrategy";
+import {
+  MongoDbAuthStrategy,
+  LocalFileAuthStrategy,
+} from "./WAClient/AuthStrategy";
 import { YouTubeFeature } from "./WABot/features/youtube/youtube";
 import { UniNotificationFeature } from "./WABot/features/uni-notifications/uni-notifications";
 
@@ -13,8 +16,9 @@ async function main() {
 
   const bot = new WABot({
     clientSettings: {
-      // authStrategy: new MongoDbAuthStrategy("Talha"),
-      authStrategy: new LocalFileAuthStrategy("auth.json"),
+      authStrategy: process.env.TESTING
+        ? new LocalFileAuthStrategy("auth.json")
+        : new MongoDbAuthStrategy("Talha"),
       sockOptions: { printQRInTerminal: true },
     },
   });

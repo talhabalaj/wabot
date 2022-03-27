@@ -11,7 +11,6 @@ import debounce from "debounce";
 import { Logger, LoggerOptions } from "pino";
 import { AuthClass, AuthModel } from "../database";
 import {
-  binaryToBuffer,
   replaceBinaryWithBuffer,
 } from "../database/utils/binaryToBuffer";
 import WLogger from "../utils/logger";

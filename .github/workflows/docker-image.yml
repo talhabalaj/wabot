@@ -23,11 +23,7 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Push the Docker image to GitHub Container Registry (versioned)
-      uses: docker/push-action@v1
-      with:
-        image: ghcr.io/talhabalaj/wabot:${{ steps.get_version.outputs.VERSION }}
-
-    - name: Push the Docker image to GitHub Container Registry (as latest)
-      uses: docker/push-action@v1
-      with:
-        image: ghcr.io/talhabalaj/wabot:${{ steps.get_version.outputs.VERSION }}
+      run: docker push ghcr.io/talhabalaj/wabot:${{ steps.get_version.outputs.VERSION }}
+    
+    - name: Push the Docker image to GitHub Container Registry (latest)
+      run: docker push ghcr.io/talhabalaj/wabot:latest

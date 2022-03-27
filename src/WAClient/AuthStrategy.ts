@@ -40,7 +40,6 @@ export class LocalFileAuthStrategy implements IAuthStrategy {
   }
 
   getCreds() {
-    console.log(this.auth.state.creds);
     return this.auth.state;
   }
 

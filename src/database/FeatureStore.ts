@@ -4,14 +4,15 @@ import {
   prop,
   Severity,
 } from "@typegoose/typegoose";
+import mongoose from "mongoose";
 
 @modelOptions({ options: { allowMixed: Severity.ALLOW } })
-export class Subscription {
-  @prop({ type: () => String })
-  public jid?: string;
-
+export class FeatureStore {
   @prop({ type: () => String })
   public name?: string;
+
+  @prop({ type: () => mongoose.Schema.Types.Mixed })
+  public store?: any;
 }
 
-export const SubscriptionModel = getModelForClass(Subscription);
+export const FeatureStoreModel = getModelForClass(FeatureStore);

@@ -6,13 +6,15 @@ specifiers:
   '@typegoose/typegoose': ^9.7.1
   '@types/debounce': ^1.2.1
   '@types/fluent-ffmpeg': ^2.1.20
+  '@types/html-to-text': ^8.1.0
   '@types/memorystream': ^0.3.0
   debounce: ^1.2.1
   dotenv: ^16.0.0
   fluent-ffmpeg: ^2.1.2
   googleapis: '39'
-  html-to-text: ^8.0.0
+  html-to-text: ^8.1.0
   memorystream: ^0.3.1
+  moment: ^2.29.1
   mongodb: ^4.4.1
   mongoose: ^6.2.8
   pino: ^7.9.2
@@ -32,6 +34,7 @@ dependencies:
   googleapis: 39.2.0
   html-to-text: 8.1.0
   memorystream: 0.3.1
+  moment: 2.29.1
   mongodb: 4.4.1
   mongoose: 6.2.8
   pino: 7.9.2
@@ -44,6 +47,7 @@ dependencies:
 devDependencies:
   '@types/debounce': 1.2.1
   '@types/fluent-ffmpeg': 2.1.20
+  '@types/html-to-text': 8.1.0
   '@types/memorystream': 0.3.0
 
 packages:
@@ -166,6 +170,10 @@ packages:
     resolution: {integrity: sha512-B+OvhCdJ3LgEq2PhvWNOiB/EfwnXLElfMCgc4Z1K5zXgSfo9I6uGKwR/lqmNPFQuebNnes7re3gqkV77SyypLg==}
     dependencies:
       '@types/node': 17.0.23
+    dev: true
+
+  /@types/html-to-text/8.1.0:
+    resolution: {integrity: sha512-54YF2fGmN4g62/w+T85uQ8n0FyBhMY5cjKZ1imsbIh4Pgbeno1mAaQktC/pv/+C2ToUYkTZis9ADgn9GRRz9nQ==}
     dev: true
 
   /@types/long/4.0.1:
@@ -698,6 +706,10 @@ packages:
 
   /minimist/1.2.6:
     resolution: {integrity: sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==}
+    dev: false
+
+  /moment/2.29.1:
+    resolution: {integrity: sha512-kHmoybcPV8Sqy59DwNDY3Jefr64lK/by/da0ViFcuA4DH0vQg5Q6Ze5VimxkfQNSC+Mls/Kx53s7TjP1RhFEDQ==}
     dev: false
 
   /mongodb-connection-string-url/2.5.2:

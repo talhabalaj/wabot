@@ -78,10 +78,12 @@ export class UniNotificationFeature extends BaseWAFeature {
       if (subscribers.length > 0) {
         const { store } = featureStoreRecord;
         let { lastUpdateTime } = store;
-        lastUpdateTime = Date.parse(lastUpdateTime);
-        const query = `after:${moment(lastUpdateTime).format("YYYY/M/D")} ${
-          store.filter ? store.filter : ""
-        }`;
+
+        if (typeof lastUpdateTime !== "number") {
+          lastUpdateTime = Date.parse(lastUpdateTime);
+        }
+
+        const query = `after:${lastUpdateTime} ${store.filter || ""}`;
 
         this.logger.info(
           { query },
@@ -90,10 +92,11 @@ export class UniNotificationFeature extends BaseWAFeature {
 
         const messages = await this.gmail.users.messages.list({
           userId: "me",
+          labelIds: ["INBOX"],
           q: query,
         });
 
-        featureStoreRecord.store.lastUpdateTime = new Date();
+        featureStoreRecord.store.lastUpdateTime = Date.now();
 
         this.logger.debug(messages, "Got messages");
 
@@ -111,10 +114,7 @@ export class UniNotificationFeature extends BaseWAFeature {
               "Got message data for " + message.id
             );
 
-            if (
-              messageDownloadedData &&
-              messageDownloadedData.internalDate > lastUpdateTime
-            ) {
+            if (messageDownloadedData) {
               const { text, attachments } = messageDownloadedData;
 
               if (text) {
@@ -128,7 +128,10 @@ export class UniNotificationFeature extends BaseWAFeature {
                   });
                 }
               } else {
-                this.logger.error("No text found in message");
+                this.logger.error(
+                  { messageDownloadedData },
+                  "No text found in message"
+                );
               }
 
               if (attachments.length > 0) {
@@ -138,11 +141,28 @@ export class UniNotificationFeature extends BaseWAFeature {
                     "Sending message to attachments"
                   );
                   for (const attachment of attachments) {
-                    await this.socket.sendMessage(subscriber.jid, {
-                      document: attachment.buffer,
-                      mimetype: attachment.mimeType,
-                      fileName: attachment.filename,
-                    });
+                    if (attachment.mimeType.startsWith("image/")) {
+                      await this.socket.sendMessage(subscriber.jid, {
+                        image: attachment.buffer,
+                        mimetype: attachment.mimeType,
+                      });
+                    } else if (attachment.mimeType.startsWith("audio/")) {
+                      await this.socket.sendMessage(subscriber.jid, {
+                        audio: attachment.buffer,
+                        mimetype: attachment.mimeType,
+                      });
+                    } else if (attachment.mimeType.startsWith("video/")) {
+                      await this.socket.sendMessage(subscriber.jid, {
+                        video: attachment.buffer,
+                        mimetype: attachment.mimeType,
+                      });
+                    } else {
+                      await this.socket.sendMessage(subscriber.jid, {
+                        document: attachment.buffer,
+                        mimetype: attachment.mimeType,
+                        fileName: attachment.filename,
+                      });
+                    }
                   }
                 }
               }
@@ -205,14 +225,12 @@ export class UniNotificationFeature extends BaseWAFeature {
     for (const part of message.payload.parts) {
       const isMessage = part.filename === "";
 
-      if (isMessage) {
+      if (isMessage && !email.text) {
         email.text =
-          email.text === ""
-            ? part.mimeType === "text/plain"
-              ? base64Decode(part.body.data)
-              : part.mimeType === "text/html"
-              ? convert(base64Decode(part.body.data))
-              : email.text
+          part.mimeType === "text/plain"
+            ? base64Decode(part.body.data)
+            : part.mimeType === "text/html"
+            ? convert(base64Decode(part.body.data))
             : email.text;
       } else {
         const downloadedAttachment =

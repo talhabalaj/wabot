@@ -1,0 +1,11 @@
+version: '3'
+services:
+  wabot:
+    image: ghcr.io/talhabalaj/wabot:latest
+    restart: always
+    environment:
+      - MONGO_URL=${MONGO_URL}
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - TESTING=${TESTING}

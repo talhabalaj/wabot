@@ -27,6 +27,7 @@ export default class WABot {
     this.wa.onSocketChange((sock) => {
       this.features.forEach((feature) => feature.onSocketConnected(sock));
     });
+    
     this.wa.addHandler("messages.upsert", (args) => {
       args.messages.forEach((message) => {
         this.features.forEach((feature) =>
@@ -36,6 +37,14 @@ export default class WABot {
         );
       });
     });
+
+    this.wa.addHandler("chats.upsert", (args) => {
+      this.features.forEach((feature) =>
+        feature.onNewChat(args).catch((err) => {
+          this.logger.error(err, "Failed handling request by feature");
+        })
+      );
+    })
   }
 
   public async addFeature(feature: IWABotFeature) {

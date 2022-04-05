@@ -8,6 +8,7 @@ import {
 } from "./WAClient/AuthStrategy";
 import { YouTubeFeature } from "./WABot/features/youtube/youtube";
 import { UniNotificationFeature } from "./WABot/features/uni-notifications/uni-notifications";
+import MemeFeature from "./WABot/features/meme/meme";
 
 config();
 
@@ -25,5 +26,6 @@ async function main() {
 
   bot.addFeature(new UniNotificationFeature("my_account"));
   bot.addFeature(new YouTubeFeature());
+  bot.addFeature(new MemeFeature());
 }
 main();

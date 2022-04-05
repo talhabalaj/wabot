@@ -31,7 +31,7 @@ export class YouTubeFeature extends BaseWAFeature {
 
     if (!song) {
       await this.socket.sendMessage(messageInfo.key.remoteJid, {
-        text: "Kera ganay ay? Menu nahi laba.",
+        text: "Menu nai laba.",
       });
       return;
     }
@@ -43,7 +43,7 @@ export class YouTubeFeature extends BaseWAFeature {
     await this.socket.sendMessage(messageInfo.key.remoteJid, {
       text: `*${info.videoDetails.media.song ?? info.videoDetails.title}* by *${
         info.videoDetails.media.artist ?? info.videoDetails.author.name
-      }*, Right?\n\nProcessing your request, please wait while I bake it in my big kitchen. Hope you aren't too hungry.`,
+      }*.\n\n\nMumkin hai ke nam galat ho, intezar kijaye mein abhi bhejta hon.`,
     });
 
     let buffer: Buffer;

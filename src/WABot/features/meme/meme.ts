@@ -5,6 +5,17 @@ import { createSlapArt } from "./slap/slap";
 import { downloadImage } from "../../../utils";
 
 export default class MemeFeature extends BaseWAFeature {
+  constructor() {
+    super();
+  }
+
+  private canBeTargetted(jid: string) {
+    return ![
+      "923084552083@s.whatsapp.net",
+      "923034793063@s.whatsapp.net",
+    ].includes(jid);
+  }
+
   private messageHandlers = {
     slap: async (messageInfo: proto.IWebMessageInfo) => {
       this.logger.info("Slap issued");
@@ -31,13 +42,19 @@ export default class MemeFeature extends BaseWAFeature {
 
       const mention = mentions[0];
 
+      if (!this.canBeTargetted(mention)) {
+        return this.socket.sendMessage(messageInfo.key.remoteJid, {
+          text: "Baba kisko marne ki koshish kar rha, sharam nahi ata?",
+        });
+      }
+
       const slapperProfileImage = await downloadImage(
         await this.socket.profilePictureUrl(
           messageInfo.key.participant,
           "image"
         )
       );
-      
+
       const beingSlappedProfileImage = await downloadImage(
         await this.socket.profilePictureUrl(mention, "image")
       );

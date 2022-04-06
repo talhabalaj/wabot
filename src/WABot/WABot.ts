@@ -31,16 +31,16 @@ export default class WABot {
 
     this.wa.addHandler("messages.upsert", (args) => {
       const timeLast15Mins = moment().subtract({ minutes: 15 }).unix();
-
-      args.messages.forEach((message) => {
-        if (timeLast15Mins <= message.messageTimestamp) {
-          this.features.forEach((feature) =>
-            feature.onNewMessage(message).catch((err) => {
-              this.logger.error(err, "Failed handling request by feature");
-            })
-          );
-        }
-      });
+      if (args.type === "notify")
+        args.messages.forEach((message) => {
+          if (timeLast15Mins <= message.messageTimestamp) {
+            this.features.forEach((feature) =>
+              feature.onNewMessage(message).catch((err) => {
+                this.logger.error(err, "Failed handling request by feature");
+              })
+            );
+          }
+        });
     });
 
     this.wa.addHandler("chats.upsert", (args) => {

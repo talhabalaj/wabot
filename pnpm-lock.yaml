@@ -13,7 +13,7 @@ specifiers:
   debounce: ^1.2.1
   dotenv: ^16.0.0
   fluent-ffmpeg: ^2.1.2
-  googleapis: '39'
+  googleapis: ^39.2.0
   html-to-text: ^8.1.0
   memorystream: ^0.3.1
   moment: ^2.29.1
@@ -22,13 +22,13 @@ specifiers:
   pino: ^7.9.2
   qrcode-terminal: ^0.12.0
   sharp: ^0.30.3
-  ts-node: ^10.3.0
-  typescript: ^4.4.4
+  ts-node: ^10.7.0
+  typescript: ^4.6.3
   ytdl-core: ^4.11.0
   ytsr: ^3.6.0
 
 dependencies:
-  '@adiwajshing/baileys': github.com/adiwajshing/baileys/6d4fc87169a6812b5e61b0ddd3eee8c1c683678d_3eae4cb450c4447ce55c019a30cf321f
+  '@adiwajshing/baileys': github.com/adiwajshing/baileys/ebf4aa6772f886d35d949b1232deadbf1412f5d3_3eae4cb450c4447ce55c019a30cf321f
   '@adiwajshing/keyed-db': 0.2.4
   '@typegoose/typegoose': 9.7.1_mongoose@6.2.8
   axios: 0.26.1
@@ -1139,8 +1139,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: false
 
-  /music-metadata/7.12.2:
-    resolution: {integrity: sha512-KO1L6q30b6HfGlDQk1VAdrZqCKi4Gy7pN7eZOZ0YZQkhF/KCLHxKCjKKli9ao9kIBC/9s+uXHvjW3bDIBWuGew==}
+  /music-metadata/7.12.3:
+    resolution: {integrity: sha512-6pZngaroNxGBf8KZjE8reGZJiS533eJq7dBFsyoiEAZIORQAxmVVx20ABh9W2tsLT+5mKYyDzcNi5GuHf3jitg==}
     engines: {node: '>=10'}
     dependencies:
       '@tokenizer/token': 0.3.0
@@ -1880,9 +1880,9 @@ packages:
       miniget: 4.2.2
     dev: false
 
-  github.com/adiwajshing/baileys/6d4fc87169a6812b5e61b0ddd3eee8c1c683678d_3eae4cb450c4447ce55c019a30cf321f:
-    resolution: {tarball: https://codeload.github.com/adiwajshing/baileys/tar.gz/6d4fc87169a6812b5e61b0ddd3eee8c1c683678d}
-    id: github.com/adiwajshing/baileys/6d4fc87169a6812b5e61b0ddd3eee8c1c683678d
+  github.com/adiwajshing/baileys/ebf4aa6772f886d35d949b1232deadbf1412f5d3_3eae4cb450c4447ce55c019a30cf321f:
+    resolution: {tarball: https://codeload.github.com/adiwajshing/baileys/tar.gz/ebf4aa6772f886d35d949b1232deadbf1412f5d3}
+    id: github.com/adiwajshing/baileys/ebf4aa6772f886d35d949b1232deadbf1412f5d3
     name: '@adiwajshing/baileys'
     version: 4.1.0
     prepare: true
@@ -1907,7 +1907,7 @@ packages:
       axios: 0.24.0
       curve25519-js: 0.0.4
       libsignal: github.com/adiwajshing/libsignal-node/4ffc1f3d6147ffdec88f62e70f41e7de2e08cd42
-      music-metadata: 7.12.2
+      music-metadata: 7.12.3
       node-cache: 5.1.2
       pino: 7.9.2
       protobufjs: 6.11.2

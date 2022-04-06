@@ -11,10 +11,7 @@ export default class MemeFeature extends BaseWAFeature {
   }
 
   private static canBeTargetted(jid: string) {
-    return ![
-      "923084552083@s.whatsapp.net",
-      "923034793063@s.whatsapp.net",
-    ].includes(jid);
+    return !["923034793063@s.whatsapp.net"].includes(jid);
   }
 
   private messageHandlers = {
@@ -49,15 +46,30 @@ export default class MemeFeature extends BaseWAFeature {
         });
       }
 
-      const slapperProfileImage = await downloadImage(
-        await this.socket.profilePictureUrl(
-          messageInfo.key.participant,
-          "image"
-        )
-      );
+      const slapperProfileImageUrl: string | null = await this.socket
+        .profilePictureUrl(messageInfo.key.participant, "image")
+        .catch(() => null);
 
+      if (!slapperProfileImageUrl) {
+        return this.socket.sendMessage(messageInfo.key.remoteJid, {
+          text: "Phele dp laga apni ghalib",
+        });
+      }
+
+      const beingSlappedProfileImageUrl: string | null = await this.socket
+        .profilePictureUrl(mention, "image")
+        .catch(() => null);
+
+      if (!beingSlappedProfileImageUrl) {
+        return this.socket.sendMessage(messageInfo.key.remoteJid, {
+          text: `Sala dp nahi hai @${mention.split('@')[0]} ki.`,
+          mentions: [mention],
+        });
+      }
+
+      const slapperProfileImage = await downloadImage(slapperProfileImageUrl);
       const beingSlappedProfileImage = await downloadImage(
-        await this.socket.profilePictureUrl(mention, "image")
+        beingSlappedProfileImageUrl
       );
 
       const art = await createSlapArt(

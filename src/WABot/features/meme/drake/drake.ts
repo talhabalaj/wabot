@@ -23,11 +23,11 @@ const drawText = (
   maxWidth: number
 ) => {
   const height = 50;
-  ctx.font = `${height}px Georgia`;
+  ctx.font = `${height}px sans-serif`;
   const { width } = ctx.measureText(text);
 
   if (width > maxWidth) {
-    ctx.font = `${Math.floor((maxWidth / width) * height)}px Georgia`;
+    ctx.font = `${Math.floor((maxWidth / width) * height)}px sans-serif`;
   } 
 
   ctx.fillText(text, x, y, maxWidth);

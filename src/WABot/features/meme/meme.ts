@@ -3,13 +3,14 @@ import { proto } from "@adiwajshing/baileys";
 import { BaseWAFeature } from "../../WABotFeature";
 import { createSlapArt } from "./slap/slap";
 import { downloadImage } from "../../../utils";
+import { createDrakeArt } from "./drake/drake";
 
 export default class MemeFeature extends BaseWAFeature {
   constructor() {
     super();
   }
 
-  private canBeTargetted(jid: string) {
+  private static canBeTargetted(jid: string) {
     return ![
       "923084552083@s.whatsapp.net",
       "923034793063@s.whatsapp.net",
@@ -42,7 +43,7 @@ export default class MemeFeature extends BaseWAFeature {
 
       const mention = mentions[0];
 
-      if (!this.canBeTargetted(mention)) {
+      if (!MemeFeature.canBeTargetted(mention)) {
         return this.socket.sendMessage(messageInfo.key.remoteJid, {
           text: "Baba kisko marne ki koshish kar rha, sharam nahi ata?",
         });
@@ -63,6 +64,25 @@ export default class MemeFeature extends BaseWAFeature {
         slapperProfileImage,
         beingSlappedProfileImage
       );
+
+      return this.socket.sendMessage(messageInfo.key.remoteJid, {
+        image: { stream: art },
+        mimetype: "image/jpeg",
+      });
+    },
+    drake: async (messageInfo: proto.IWebMessageInfo) => {
+      this.logger.info("Drake issued");
+
+      if (!MemeFeature.isTextMessage(messageInfo)) {
+        return;
+      }
+
+      const [, , args] = MemeFeature.getProcessedCommand(messageInfo);
+      const [text1 = "kush likh", text2 = "comma laga"] = args
+        .split(",", 2)
+        .map((text) => text.trim());
+
+      const art = await createDrakeArt(text1, text2);
 
       return this.socket.sendMessage(messageInfo.key.remoteJid, {
         image: { stream: art },

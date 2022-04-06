@@ -1,4 +1,5 @@
 import { MessageUpdateType, proto, WASocket } from "@adiwajshing/baileys";
+import moment from "moment";
 import { Logger, LoggerOptions } from "pino";
 import WLogger from "../utils/logger";
 import { WAClient, WAClientConfig } from "../WAClient";
@@ -27,14 +28,18 @@ export default class WABot {
     this.wa.onSocketChange((sock) => {
       this.features.forEach((feature) => feature.onSocketConnected(sock));
     });
-    
+
     this.wa.addHandler("messages.upsert", (args) => {
+      const timeLast15Mins = moment().subtract({ minutes: 15 }).unix();
+
       args.messages.forEach((message) => {
-        this.features.forEach((feature) =>
-          feature.onNewMessage(message).catch((err) => {
-            this.logger.error(err, "Failed handling request by feature");
-          })
-        );
+        if (timeLast15Mins <= message.messageTimestamp) {
+          this.features.forEach((feature) =>
+            feature.onNewMessage(message).catch((err) => {
+              this.logger.error(err, "Failed handling request by feature");
+            })
+          );
+        }
       });
     });
 
@@ -44,7 +49,7 @@ export default class WABot {
           this.logger.error(err, "Failed handling request by feature");
         })
       );
-    })
+    });
   }
 
   public async addFeature(feature: IWABotFeature) {

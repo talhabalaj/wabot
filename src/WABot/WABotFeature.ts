@@ -9,9 +9,9 @@ export interface IWABotFeature {
 }
 
 export abstract class BaseWAFeature implements IWABotFeature {
-  protected socket: WASocket;
+  public socket: WASocket;
 
-  constructor(protected logger: Logger<LoggerOptions> = WLogger) {}
+  constructor(public logger: Logger<LoggerOptions> = WLogger) {}
 
   public async onSocketConnected(socket: WASocket) {
     this.socket = socket;

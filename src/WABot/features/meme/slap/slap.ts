@@ -3,15 +3,11 @@ import { createCanvas, Image, loadImage } from "canvas";
 import path from "path";
 import { downloadImage } from "../../../../utils";
 import MemeFeature from "../meme";
+import { loadAndCacheImage } from "../utils";
 
 let image: Image;
 
-async function getSlapImage() {
-  if (!image)
-    image = await loadImage(path.join(__dirname, "../slap/assets/slap.jpg"));
-
-  return image;
-}
+const getSlapImage = loadAndCacheImage("../slap/assets/slap.jpg")
 
 export async function createSlapArt(slapper: Buffer, beingSlapped: Buffer) {
   const slapImage = await getSlapImage();

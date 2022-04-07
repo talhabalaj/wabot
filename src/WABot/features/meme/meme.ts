@@ -1,7 +1,9 @@
 import { proto } from "@adiwajshing/baileys";
 import { BaseWAFeature } from "../../WABotFeature";
+import { createDrakeArt } from "./drake/drake";
+import { createGradesArt } from "./grades/grades";
 import { handleSlapMessage } from "./slap/slap";
-import { handleDrakeMessage } from "./drake/drake";
+import { createTextMemeHandler } from "./utils";
 
 export default class MemeFeature extends BaseWAFeature {
   constructor() {
@@ -14,7 +16,8 @@ export default class MemeFeature extends BaseWAFeature {
 
   private messageHandlers = {
     slap: handleSlapMessage,
-    drake: handleDrakeMessage,
+    drake: createTextMemeHandler(createDrakeArt),
+    grades: createTextMemeHandler(createGradesArt)
   };
 
   private prefix: string = "pls";

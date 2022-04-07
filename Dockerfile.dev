@@ -1,7 +1,7 @@
 FROM node:16-alpine
 
 WORKDIR /app
-RUN apk add git ffmpeg python3 cairo-dev pango-dev jpeg-dev make gcc g++ ttf-opensans
+RUN apk add git ffmpeg python3 cairo-dev pango-dev jpeg-dev make gcc g++ ttf-opensans font-noto-emoji
 RUN npm install -g pnpm
 
 CMD [ "echo" ]

@@ -15,3 +15,4 @@ lib
 .env
 
 auth.json
+.pnpm-store

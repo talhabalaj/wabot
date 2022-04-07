@@ -8,6 +8,7 @@
     "outDir": "lib",
     "strict": false,
     "noImplicitThis": true,
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,

@@ -5,9 +5,8 @@ import { downloadImage } from "../../../../utils";
 import MemeFeature from "../meme";
 import { loadAndCacheImage } from "../utils";
 
-let image: Image;
 
-const getSlapImage = loadAndCacheImage("../slap/assets/slap.jpg")
+const getSlapImage = loadAndCacheImage(path.join(__dirname, "./assets/slap.jpg"))
 
 export async function createSlapArt(slapper: Buffer, beingSlapped: Buffer) {
   const slapImage = await getSlapImage();

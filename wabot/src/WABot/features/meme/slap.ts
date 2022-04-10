@@ -1,9 +1,9 @@
 import { proto } from "@adiwajshing/baileys";
 import { createCanvas, Image, loadImage } from "canvas";
 import path from "path";
-import { downloadImage } from "../../../../utils";
-import MemeFeature from "../meme";
-import { loadAndCacheImage } from "../utils";
+import { downloadImage } from "../../../utils";
+import MemeFeature from "./meme";
+import { loadAndCacheImage } from "./utils";
 
 
 const getSlapImage = loadAndCacheImage(path.join(__dirname, "./assets/slap.jpg"))

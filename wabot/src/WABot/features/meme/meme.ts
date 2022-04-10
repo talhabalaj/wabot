@@ -2,7 +2,7 @@ import { proto } from "@adiwajshing/baileys";
 import { BaseWAFeature } from "../../WABotFeature";
 import { createDrakeArt } from "./drake";
 import { createGradesArt } from "./grades";
-import { handleSlapMessage } from "./slap/slap";
+import { handleSlapMessage } from "./slap";
 import { createTextMemeHandler } from "./utils";
 
 export default class MemeFeature extends BaseWAFeature {

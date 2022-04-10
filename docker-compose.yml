@@ -9,3 +9,10 @@ services:
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
       - LOG_LEVEL=${LOG_LEVEL}
       - TESTING=${TESTING}
+      - IMAGE_EDIT_SERVER_ADDRESS=image_service:50015
+
+  image_service:
+    image: ghcr.io/talhabalaj/wabot-image-editing-service:latest
+    restart: always
+    environment:
+      - PORT=50015

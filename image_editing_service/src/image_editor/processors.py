@@ -1,6 +1,7 @@
 import os
 from .utils import fit_text
 from PIL import Image, ImageDraw, ImageFont
+import io
 
 font = ImageFont.truetype("/usr/share/fonts/TTF/DejaVuSans.ttf", size=50)
 
@@ -19,4 +20,7 @@ def grades_image_processsor(text1: str, text2: str):
   fit_text(image_draw, box_2, text1, font)
   fit_text(image_draw, box_3, text2, font)
 
-  return image.tobytes()
+  memory = io.BytesIO()
+  image.save(memory, format='JPEG')
+
+  return memory.getvalue()

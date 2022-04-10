@@ -3,7 +3,7 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "debug": "ts-node  -r tsconfig-paths/register src/test.ts",
-    "generate-image-service": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=src/ImageEditorService protos/image_editor.proto --ts_proto_opt=outputServices=grpc-js --ts_proto_opt=esModuleInterop=true"
+    "generate-image-service": "protoc --plugin=./node_modules/.bin/protoc-gen-ts_proto --ts_proto_out=src/ImageEditorService ../protos/image_editor.proto --ts_proto_opt=outputServices=grpc-js --ts_proto_opt=esModuleInterop=true"
   },
   "dependencies": {
     "@adiwajshing/baileys": "github:adiwajshing/baileys",

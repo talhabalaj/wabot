@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pillow = "*"
+grpcio = "*"
+grpcio-tools = "*"
+
+[dev-packages]
+ipykernel = "*"
+black = "*"
+yapf = "*"
+autopep8 = "*"
+
+[requires]
+python_version = "3.10"
+
+[pipenv]
+allow_prereleases = true

@@ -1,7 +1,7 @@
 import { proto } from "@adiwajshing/baileys";
 import { BaseWAFeature } from "../../WABotFeature";
-import { createDrakeArt } from "./drake/drake";
-import { createGradesArt } from "./grades/grades";
+import { createDrakeArt } from "./drake";
+import { createGradesArt } from "./grades";
 import { handleSlapMessage } from "./slap/slap";
 import { createTextMemeHandler } from "./utils";
 

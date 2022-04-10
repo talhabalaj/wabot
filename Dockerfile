@@ -1,8 +1,8 @@
-FROM node:16-alpine
+FROM node:16
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN apk add git ffmpeg python3 cairo-dev pango-dev jpeg-dev make gcc g++ ttf-opensans font-noto-emoji
+RUN apt update && apt install git ffmpeg python3
 RUN npm install -g pnpm
 RUN pnpm i 
 COPY . .

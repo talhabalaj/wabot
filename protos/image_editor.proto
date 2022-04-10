@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+service ImageEditor {
+  rpc Grades(GradesRequest) returns (GradesResponse) {}
+}
+
+message GradesRequest {
+  string text1 = 1;
+  string text2 = 2;
+}
+
+message GradesResponse {
+  bytes image = 1;
+}

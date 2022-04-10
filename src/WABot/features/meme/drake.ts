@@ -1,7 +1,7 @@
 import {
   createCanvas,
 } from "canvas";
-import { loadAndCacheImage, drawText } from "../utils";
+import { loadAndCacheImage, drawText } from "./utils";
 import path from "path"
 
 const getDrakeImage = loadAndCacheImage(path.join(__dirname, "./assets/drake.jpg"))

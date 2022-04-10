@@ -25,3 +25,23 @@ jobs:
     
     - name: Push the Docker image to GitHub Container Registry (latest)
       run: docker push ghcr.io/talhabalaj/wabot:latest
+  
+  build-wabot-image-editing-service:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get the version
+      id: get_version
+      run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+    
+    - name: Build the Docker image
+      run: cd image_editing_service && docker build . --file Dockerfile --tag ghcr.io/talhabalaj/wabot-image-editing-service:${{ steps.get_version.outputs.VERSION }} --tag ghcr.io/talhabalaj/wabot-image-editing-service:latest
+
+    - name: Login to ghcr.io
+      run: echo ${{ secrets.PAT }} | docker login -u ${{ github.actor }} --password-stdin ghcr.io
+
+    - name: Push the Docker image to GitHub Container Registry (versioned)
+      run: docker push ghcr.io/talhabalaj/wabot-image-editing-service:${{ steps.get_version.outputs.VERSION }}
+    
+    - name: Push the Docker image to GitHub Container Registry (latest)
+      run: docker push ghcr.io/talhabalaj/wabot-image-editing-service:latest
